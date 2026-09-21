@@ -1,0 +1,9 @@
+# The CDN is public: never publish local helper scripts or private metadata.
+*.bat
+*.cmd
+*.ps1
+*.json
+*.log
+*.pdb
+*.blend
+*.blend1

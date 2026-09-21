@@ -1,0 +1,13 @@
+<!doctype html>
+<meta charset="utf-8"><title>Gunware blip atlas matcher</title>
+<pre id="out">Chargement…</pre>
+<script>
+const root = "/";
+const atlases = ["blips_texturesheet.png","blips_texturesheet_ng.png","blips_texturesheet_ng_2.png","blips_texturesheet_ng_3.png"];
+const ids = [322,323,324,325,326,327,328,329,330];
+const load = src => new Promise((resolve,reject)=>{ const image=new Image(); image.onload=()=>resolve(image); image.onerror=reject; image.src=src; });
+const canvas = (w,h) => { const c=document.createElement("canvas"); c.width=w;c.height=h;return c; };
+function pixels(image,w,h){ const c=canvas(w,h),x=c.getContext("2d");x.clearRect(0,0,w,h);x.drawImage(image,0,0,w,h);return x.getImageData(0,0,w,h).data; }
+function score(atlas,sprite,aw,cx,cy){let inter=0,union=0,error=0;for(let y=0;y<64;y++)for(let x=0;x<64;x++){let ai=((cy*64+y)*aw+cx*64+x)*4,bi=(y*64+x)*4,a=atlas[ai+3],b=sprite[bi+3],aa=a>32,bb=b>32;if(aa&&bb){inter++;error+=Math.abs(a-b)+Math.abs(atlas[ai]-sprite[bi])+Math.abs(atlas[ai+1]-sprite[bi+1])+Math.abs(atlas[ai+2]-sprite[bi+2])}if(aa||bb)union++;}return union?inter/union-error/(inter*1020+1):0}
+(async()=>{const out=[];const sprites={};for(const id of ids)sprites[id]=pixels(await load(root+"blips/"+id+".webp"),64,64);for(const name of atlases){const im=await load(root+"atlas-dump/"+name),aw=im.naturalWidth,ah=im.naturalHeight,a=pixels(im,aw,ah);for(const id of ids){const hits=[];for(let y=0;y<ah/64;y++)for(let x=0;x<aw/64;x++)hits.push({s:score(a,sprites[id],aw,x,y),atlas:name,x:x*64,y:y*64});hits.sort((a,b)=>b.s-a.s);for(const h of hits.slice(0,3))out.push(`${name} sprite=${id} x=${h.x} y=${h.y} score=${h.s.toFixed(4)}`)}}document.querySelector("#out").textContent=out.join("\n")})().catch(e=>document.querySelector("#out").textContent="ERROR: "+e);
+</script>

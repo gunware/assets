@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8" />
+	<title>gunware — lecteur</title>
+	<style>
+		html, body { margin: 0; background: transparent; overflow: hidden; }
+
+		/*
+		 * Le lecteur garde une VRAIE TAILLE. Le replier a un pixel est la
+		 * maniere evidente de le cacher, et la seule qui ne marche pas : un
+		 * lecteur juge invisible ne demarre pas. Il attend un evenement de mise
+		 * en page pour se reveiller — fermer un menu, par exemple — et la
+		 * musique part alors sans qu on comprenne pourquoi.
+		 *
+		 * Le cadre qui contient cette page est transparent et ne prend pas la
+		 * souris : sa vraie taille doit rester intacte jusque dans ce document.
+		 */
+		#player { position: absolute; inset: 0; width: 100%; min-width: 200px; height: 100%; min-height: 200px; pointer-events: none; }
+	</style>
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script src="./yt.js" defer></script>
+</head>
+
+<body>
+	<div id="player"></div>
+</body>
+
+</html>

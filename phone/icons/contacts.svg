@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+	<defs>
+		<linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#ffffff"/>
+			<stop offset="1" stop-color="#e6e6e9"/>
+		</linearGradient>
+		<linearGradient id="bust" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#9b9ba1"/>
+			<stop offset="1" stop-color="#75757c"/>
+		</linearGradient>
+	</defs>
+	<rect width="120" height="120" fill="url(#page)"/>
+	<rect x="0" y="0" width="9" height="120" fill="#d3d3d8"/>
+	<g fill="url(#bust)">
+		<circle cx="60" cy="47" r="18"/>
+		<path d="M60 69c-17 0-30 10-33 24a4 4 0 0 0 4 5h58a4 4 0 0 0 4-5c-3-14-16-24-33-24z"/>
+	</g>
+	<g>
+		<rect x="103" y="16" width="17" height="9" rx="4.5" fill="#ff3b30"/>
+		<rect x="103" y="34" width="17" height="9" rx="4.5" fill="#ff9500"/>
+		<rect x="103" y="52" width="17" height="9" rx="4.5" fill="#ffcc00"/>
+		<rect x="103" y="70" width="17" height="9" rx="4.5" fill="#34c759"/>
+		<rect x="103" y="88" width="17" height="9" rx="4.5" fill="#0a84ff"/>
+	</g>
+</svg>
